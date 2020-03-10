@@ -1,0 +1,4 @@
+104.160.131.3-North America (NA)	
+104.160.141.3-Europe (EUW)
+104.160.156.1-Australia	
+104.160.136.3-Latin America
