@@ -1,0 +1,15 @@
+185.25.183.1-Dubai/Middle East
+146.66.156.2-Russia/Stockholm/EU North
+146.66.155.1-Vienna/EU East
+146.66.159.2-Luxembourg/EU West
+208.78.164.1-US East/Sterling/Virginia
+192.69.96.1-US West/Seattle/Washington
+103.28.54.1-SE Asia/Singapore
+197.80.4.37-South Africa/Cape town
+103.10.125.3-Australia/Sydney
+209.197.29.2-South America/Brazil/SaoPaulo
+162.254.194.1-US SouthWest/California
+162.254.199.1-US SouthEast/Atlanta
+45.121.184.1-Singapore
+155.133.243.1-Poland
+45.121.187.1-Japan
