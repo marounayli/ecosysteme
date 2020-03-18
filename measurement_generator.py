@@ -1,28 +1,27 @@
 import requests
 import json
+import config
 
 baseURL = "https://atlas.ripe.net/api/v2/measurements/?key="
-API_KEY_Maroun = "79a48bbe-42d3-4ed2-893f-bae997321d2e"
-
-files=["DOTA2","PUBG","LOL"]
+files = ["DOTA2", "PUBG", "LOL"]
 Games = dict()
 for file in files:
-    with open(file+".txt" , 'r') as f:
-        data=[]
+    with open(file+".txt", 'r') as f:
+        data = []
         for line in f:
             data.append(line.rstrip().split('-'))
-        Games[file]=data
+        Games[file] = data
 
 for k, v in Games.items():
     for ip in v:
-        data= {
+        data = {
             "definitions": [
                 {
                     "target": str(ip[0]),
                     "description": "Ping to the server " + str(ip[1]) + " " + str(k),
                     "type": "ping",
                     "af": 4,
-                    "is_oneoff" : True
+                    "is_oneoff": True
                 }
             ],
             "probes": [
@@ -33,10 +32,9 @@ for k, v in Games.items():
                 }
             ]
         }
-        
-        url = baseURL + API_KEY_Maroun
+
+        url = baseURL + config.API_KEY_Maroun
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         r = requests.post(url, data=json.dumps(data), headers=headers)
 
         print(r.content)
-        
