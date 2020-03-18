@@ -1,9 +1,10 @@
 import requests
 import json
 import config
+import probes
 
 baseURL = "https://atlas.ripe.net/api/v2/measurements/?key="
-files = ["DOTA2", "PUBG", "LOL"]
+files = ["DOTA2", "PUBG", "LOL", "CSGO"]
 Games = dict()
 for file in files:
     with open(file+".txt", 'r') as f:
@@ -11,6 +12,9 @@ for file in files:
         for line in f:
             data.append(line.rstrip().split('-'))
         Games[file] = data
+
+# preparing the probes:
+loaded_probes = probes.dynamic_probe_loading()
 
 for k, v in Games.items():
     for ip in v:
@@ -26,9 +30,9 @@ for k, v in Games.items():
             ],
             "probes": [
                 {
-                    "requested": 18,
+                    "requested": len(loaded_probes),
                     "type": "probes",
-                    "value": "3474, 4452, 51488, 35734, 51863, 34151, 16687, 17775, 2949, 30120, 50764, 30783, 29599, 50834, 6090, 25901, 1000245, 31132"
+                    "value": (", ").join(loaded_probes)
                 }
             ]
         }
