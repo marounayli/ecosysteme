@@ -2,9 +2,15 @@ import requests
 import json
 import config
 import probes
+import logging_manager
 
+errors = []
+successes = []
 baseURL = "https://atlas.ripe.net/api/v2/measurements/?key="
-files = ["DOTA2", "PUBG", "LOL", "CSGO"]
+ips_folder = "IPV4_ADDR/"
+files = [ips_folder+"DOTA2", ips_folder +
+         "PUBG", ips_folder+"CSGO", ips_folder+"LOL"]
+
 Games = dict()
 for file in files:
     with open(file+".txt", 'r') as f:
@@ -40,5 +46,13 @@ for k, v in Games.items():
         url = baseURL + config.API_KEY_Maroun
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         r = requests.post(url, data=json.dumps(data), headers=headers)
-
-        print(r.content)
+        if(r.ok == False):
+            errors.append(ip)
+        else:
+            successes.append(str(r.text))
+    print("The following requests failed to get created", end=" ")
+    for i in errors:
+        print(ip, end=" ")
+    print("Logging...")
+    logging_manager.logerrors(errors)
+    logging_manager.logsuccesses(successes)
