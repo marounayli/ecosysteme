@@ -13,5 +13,5 @@ def logerrors(errors):
 def logsuccesses(successes):
     success_log = open("log_creation_successes.txt", 'w')
     for success in successes:
-        success_log.write(success + str(dt.datetime.now)+'\n')
+        success_log.write(success +"-"+str(dt.datetime.now())+'\n')
     success_log.close()

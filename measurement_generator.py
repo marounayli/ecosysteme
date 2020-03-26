@@ -42,17 +42,15 @@ for k, v in Games.items():
                 }
             ]
         }
-
         url = baseURL + config.API_KEY_Maroun
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         r = requests.post(url, data=json.dumps(data), headers=headers)
         if(r.ok == False):
             errors.append(ip)
+            print(r.text)
         else:
-            successes.append(str(r.text))
-    print("The following requests failed to get created", end=" ")
-    for i in errors:
-        print(ip, end=" ")
-    print("Logging...")
-    logging_manager.logerrors(errors)
-    logging_manager.logsuccesses(successes)
+            s=r.content.decode("utf-8")
+            successes.append(s[1:len(s)-1])
+            print("Success=", s[1:len(s)-1])
+logging_manager.logerrors(errors)
+logging_manager.logsuccesses(successes)
