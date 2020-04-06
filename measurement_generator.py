@@ -23,7 +23,6 @@ for file in files:
 
 # preparing the probes:
 loaded_probes = probes.dynamic_probe_loading()
-logging_manager.logActiveProbes(loaded_probes)
 print("Loaded probes : ", loaded_probes)
 counter = 0
 for k, v in Games.items():
@@ -58,8 +57,7 @@ for k, v in Games.items():
             s = r.content.decode("utf-8")
             successes.append((ip[0], s[1:len(s)-1], k))
             print("Success=", s[1:len(s)-1])
-        if counter == 4:
-            break
-    break
-logging_manager.logerrors(errors)
+
+# logging_manager.logerrors(errors)
+print(errors)
 logging_manager.logsuccesses(successes)
