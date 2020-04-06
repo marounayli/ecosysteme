@@ -12,10 +12,12 @@ for r, d, f in os.walk(results_path):
     for file in f:
         results_files.append(os.path.join(r, file))
 
-
+# print(results_files)
+DATA_AGGREGATION = dict()
 def get_1d_aggregation():
-    DATA_AGGREGATION = dict()
+    counter =0
     for file in results_files:
+        counter+=1
         for i in coutry_probe_map.keys():
             results_raw[i] = list()
 
@@ -36,7 +38,6 @@ def get_1d_aggregation():
                 results_raw[i] = np.median(results_raw[i])
             else:
                 results_raw[i] = -1
-
         for i in results_raw:
             if results_filtered[coutry_probe_map[i]][1] == -1:
                 continue
@@ -45,13 +46,14 @@ def get_1d_aggregation():
         polluted = []
         for i in results_filtered:
             try:
-                results_filtered[i] = results_filtered[i][1] / \
-                    results_filtered[i][0]
+                results_filtered[i] = results_filtered[i][1] / results_filtered[i][0]
             except:
                 polluted.append(i)
         for i in polluted:
             del results_filtered[i]
-
-        DATA_AGGREGATION[Destination] = results_filtered
+        # print(results_filtered,Destination)
+        DATA_AGGREGATION[Destination]=results_filtered.copy()
     return DATA_AGGREGATION
 
+a=get_1d_aggregation()
+print(a)
